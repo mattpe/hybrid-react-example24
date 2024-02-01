@@ -55,7 +55,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {mediaArray.map((item) => <MediaRow mediaItem={item} />)}
+          {mediaArray.map((item) => <MediaRow key={item.media_id} mediaItem={item} />)}
         </tbody>
       </table>
     </>
