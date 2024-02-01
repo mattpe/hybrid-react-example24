@@ -61,7 +61,7 @@ const Home = () => {
           {mediaArray.map((item) => (
             <MediaRow
               key={item.media_id}
-              mediaItem={item}
+              item={item}
               setSelectedItem={setSelectedItem}
             />
           ))}

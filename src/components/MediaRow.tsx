@@ -1,11 +1,10 @@
 import {MediaItem} from '../types/DBTypes';
 
 const MediaRow = (props: {
-  mediaItem: MediaItem;
-  setSelectedItem: (item: MediaItem | undefined) => undefined;
+  item: MediaItem;
+  setSelectedItem: (item: MediaItem | undefined) => void;
 }) => {
-  const item = props.mediaItem;
-  const setSelectedItem = props.setSelectedItem;
+  const {item, setSelectedItem}  = props;
 
   return (
     <tr className="media-row">
