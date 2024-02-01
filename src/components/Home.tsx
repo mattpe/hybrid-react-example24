@@ -1,7 +1,9 @@
+import {useState} from 'react';
 import {MediaItem} from '../types/DBTypes';
 import MediaRow from './MediaRow';
 
 const Home = () => {
+  const [selectedItem, setSelectedItem] = useState<MediaItem | undefined>();
   const mediaArray: MediaItem[] = [
     {
       media_id: 8,
@@ -43,6 +45,7 @@ const Home = () => {
   return (
     <>
       <h2>My Media</h2>
+      <p>{selectedItem?.media_id}</p>
       <table>
         <thead>
           <tr>
@@ -55,7 +58,13 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {mediaArray.map((item) => <MediaRow key={item.media_id} mediaItem={item} />)}
+          {mediaArray.map((item) => (
+            <MediaRow
+              key={item.media_id}
+              mediaItem={item}
+              setSelectedItem={setSelectedItem}
+            />
+          ))}
         </tbody>
       </table>
     </>
