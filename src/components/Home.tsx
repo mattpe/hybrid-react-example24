@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {MediaItem} from '../types/DBTypes';
 import MediaRow from './MediaRow';
+import SingleView from './SingleView';
 
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState<MediaItem | undefined>();
@@ -44,8 +45,10 @@ const Home = () => {
 
   return (
     <>
+      {selectedItem && (
+        <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
+      )}
       <h2>My Media</h2>
-      <p>{selectedItem?.media_id}</p>
       <table>
         <thead>
           <tr>
