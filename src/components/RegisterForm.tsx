@@ -1,5 +1,55 @@
+import {useForm} from '../hooks/formHooks';
+
 const RegisterForm = () => {
-  return <form>This is a registration form</form>
+  const initValues = {username: '', password: '', email: ''};
+
+  const doRegister = () => {
+    console.log(inputs);
+  };
+
+  const {handleSubmit, handleInputChange, inputs} = useForm(
+    doRegister,
+    initValues,
+  );
+
+  return (
+    <>
+      <h3>Register</h3>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            name="username"
+            type="text"
+            id="username"
+            onChange={handleInputChange}
+            autoComplete="username"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            id="password"
+            onChange={handleInputChange}
+            autoComplete="current-password"
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Password</label>
+          <input
+            name="email"
+            type="email"
+            id="email"
+            onChange={handleInputChange}
+            autoComplete="email"
+          />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </>
+  );
 };
 
 export default RegisterForm;
