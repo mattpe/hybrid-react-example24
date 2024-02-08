@@ -10,12 +10,16 @@ const LoginForm = () => {
   const initValues: Credentials = {username: '', password: ''};
 
   const doLogin = async () => {
-    console.log('submit callback, inputs:', inputs);
-    // TODO: use postLogin to authenticate with server
-    const loginResult = await postLogin(inputs as Credentials);
-    if (loginResult) {
-      localStorage.setItem('token', loginResult.token);
-      navigate('/');
+    try {
+      console.log('submit callback, inputs:', inputs);
+      // TODO: use postLogin to authenticate with server
+      const loginResult = await postLogin(inputs as Credentials);
+      if (loginResult) {
+        localStorage.setItem('token', loginResult.token);
+        navigate('/');
+      }
+    } catch (error) {
+      console.log((error as Error).message);
     }
   };
 
