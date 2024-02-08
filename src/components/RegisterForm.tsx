@@ -37,7 +37,7 @@ const RegisterForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Password</label>
+          <label htmlFor="email">Email</label>
           <input
             name="email"
             type="email"
