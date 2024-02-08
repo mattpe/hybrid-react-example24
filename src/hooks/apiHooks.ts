@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {MediaItem, MediaItemWithOwner, User} from '../types/DBTypes';
 import {fetchData} from '../lib/functions';
 import {Credentials} from '../types/LocalTypes';
-import {LoginResponse} from '../types/MessageTypes';
+import {LoginResponse, UserResponse} from '../types/MessageTypes';
 
 const useMedia = (): MediaItemWithOwner[] => {
   const [mediaArray, setMediaArray] = useState<MediaItemWithOwner[]>([]);
@@ -41,6 +41,19 @@ const useMedia = (): MediaItemWithOwner[] => {
 
 const useUser = () => {
   // TODO: implement network functions for auth server user endpoints
+  const getUserByToken = async (token: string) => {
+    const options = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
+    return await fetchData<UserResponse>(
+      import.meta.env.VITE_AUTH_API + '/users/token/',
+      options,
+    );
+  };
+
+  return {getUserByToken};
 };
 
 const useAuthentication = () => {
