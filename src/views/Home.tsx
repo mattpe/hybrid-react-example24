@@ -1,10 +1,8 @@
-import {MediaItemWithOwner} from '../types/DBTypes';
 import MediaRow from '../components/MediaRow';
 import {useMedia} from '../hooks/apiHooks';
 
 const Home = () => {
-
-  const mediaArray: MediaItemWithOwner[] = useMedia();
+  const {mediaArray} = useMedia();
 
   return (
     <>
@@ -23,10 +21,7 @@ const Home = () => {
         </thead>
         <tbody>
           {mediaArray.map((item) => (
-            <MediaRow
-              key={item.media_id}
-              item={item}
-            />
+            <MediaRow key={item.media_id} item={item} />
           ))}
         </tbody>
       </table>
