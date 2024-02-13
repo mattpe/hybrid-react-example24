@@ -12,6 +12,20 @@ type User = {
   created_at: Date | string;
 };
 
+// for REST API
+// type MediaItem = {
+//   media_id: number;
+//   user_id: number;
+//   filename: string;
+//   thumbnail: string;
+//   filesize: number;
+//   media_type: string;
+//   title: string;
+//   description: string | null;
+//   created_at: Date | string;
+// };
+
+// FOR GRAPHQL
 type MediaItem = {
   media_id: number;
   user_id: number;
@@ -22,6 +36,13 @@ type MediaItem = {
   title: string;
   description: string | null;
   created_at: Date | string;
+  owner: User;
+  tags?: Tag[];
+  likes?: Like[];
+  ratings?: Rating[];
+  likes_count: number;
+  average_rating?: number;
+  comments_count: number;
 };
 
 type Comment = {
