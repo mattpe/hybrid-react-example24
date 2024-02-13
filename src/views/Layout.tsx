@@ -22,38 +22,43 @@ const Layout = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                className="block p-4 text-center text-slate-50 hover:bg-slate-700"
-                to="/profile"
-              >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block p-4 text-center text-slate-50 hover:bg-slate-700"
-                to="/upload"
-              >
-                Upload
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block p-4 text-center text-slate-50 hover:bg-slate-700"
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block p-4 text-center text-slate-50 hover:bg-slate-700"
-                to="/logout"
-              >
-                Logout
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link
+                    className="block p-4 text-center text-slate-50 hover:bg-slate-700"
+                    to="/profile"
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="block p-4 text-center text-slate-50 hover:bg-slate-700"
+                    to="/upload"
+                  >
+                    Upload
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="block p-4 text-center text-slate-50 hover:bg-slate-700"
+                    to="/logout"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  className="block p-4 text-center text-slate-50 hover:bg-slate-700"
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>

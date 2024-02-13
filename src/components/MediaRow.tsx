@@ -5,7 +5,7 @@ import {useUserContext} from '../hooks/ContextHooks';
 const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {item} = props;
   const {user} = useUserContext();
-
+  console.log('user', user);
   return (
     <tr className="media-row">
       <td>
@@ -25,22 +25,23 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
         >
           View
         </Link>
-        {user && (
-          <>
-            <button
-              className="bg-slate-700 p-2 hover:bg-slate-950"
-              onClick={() => console.log('modify', item)}
-            >
-              Modify
-            </button>
-            <button
-              className="bg-slate-700 p-2 hover:bg-slate-950"
-              onClick={() => console.log('delete', item)}
-            >
-              Delete
-            </button>
-          </>
-        )}
+        {user &&
+          (user.user_id === item.user_id || user.level_name === 'Admin') && (
+            <>
+              <button
+                className="bg-slate-700 p-2 hover:bg-slate-950"
+                onClick={() => console.log('modify', item)}
+              >
+                Modify
+              </button>
+              <button
+                className="bg-slate-700 p-2 hover:bg-slate-950"
+                onClick={() => console.log('delete', item)}
+              >
+                Delete
+              </button>
+            </>
+          )}
       </td>
     </tr>
   );
