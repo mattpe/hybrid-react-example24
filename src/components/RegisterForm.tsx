@@ -11,8 +11,9 @@ const RegisterForm = () => {
 
   const doRegister = async () => {
     try {
-      console.log(inputs);
-      await postUser(inputs);
+      if (usernameAvailable && emailAvailable) {
+        await postUser(inputs);
+      }
     } catch (error) {
       console.log((error as Error).message);
     }
@@ -57,6 +58,11 @@ const RegisterForm = () => {
             autoComplete="username"
           />
         </div>
+        {!usernameAvailable && (
+          <div className="flex w-4/5 justify-end pr-4">
+            <p className="text-red-500">Username not available</p>
+          </div>
+        )}
         <div className="flex w-4/5">
           <label className="w-1/3 p-6 text-end" htmlFor="password">
             Password
@@ -67,7 +73,6 @@ const RegisterForm = () => {
             type="password"
             id="password"
             onChange={handleInputChange}
-            onBlur={handleEmailBlur}
             autoComplete="current-password"
           />
         </div>
@@ -81,9 +86,15 @@ const RegisterForm = () => {
             type="email"
             id="email"
             onChange={handleInputChange}
+            onBlur={handleEmailBlur}
             autoComplete="email"
           />
         </div>
+        {!emailAvailable && (
+          <div className="flex w-4/5 justify-end pr-4">
+            <p className="text-red-500">Email not available</p>
+          </div>
+        )}
         <div className="flex w-4/5 justify-end">
           <button
             className="m-3 w-1/3 rounded-md bg-slate-700 p-3"
