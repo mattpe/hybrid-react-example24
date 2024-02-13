@@ -22,11 +22,14 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h3>Register</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
+      <h3 className="text-3xl">Register</h3>
+      <form onSubmit={handleSubmit} className="flex flex-col text-center">
+        <div className="flex w-4/5">
+          <label className="w-1/3 p-6 text-end" htmlFor="username">
+            Username
+          </label>
           <input
+            className="m-3 w-2/3 rounded-md border border-slate-500 p-3 text-slate-950"
             name="username"
             type="text"
             id="username"
@@ -34,9 +37,12 @@ const RegisterForm = () => {
             autoComplete="username"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="flex w-4/5">
+          <label className="w-1/3 p-6 text-end" htmlFor="password">
+            Password
+          </label>
           <input
+            className="m-3 w-2/3 rounded-md border border-slate-500 p-3 text-slate-950"
             name="password"
             type="password"
             id="password"
@@ -44,9 +50,12 @@ const RegisterForm = () => {
             autoComplete="current-password"
           />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="flex w-4/5">
+          <label className="w-1/3 p-6 text-end" htmlFor="email">
+            Email
+          </label>
           <input
+            className="m-3 w-2/3 rounded-md border border-slate-500 p-3 text-slate-950"
             name="email"
             type="email"
             id="email"
@@ -54,7 +63,14 @@ const RegisterForm = () => {
             autoComplete="email"
           />
         </div>
-        <button type="submit">Register</button>
+        <div className="flex w-4/5 justify-end">
+          <button
+            className="m-3 w-1/3 rounded-md bg-slate-700 p-3"
+            type="submit"
+          >
+            Register
+          </button>
+        </div>
       </form>
     </>
   );
