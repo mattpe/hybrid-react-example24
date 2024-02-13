@@ -1,8 +1,11 @@
+import {useState} from 'react';
 import {useUser} from '../hooks/apiHooks';
 import {useForm} from '../hooks/formHooks';
 
 const RegisterForm = () => {
   const {postUser} = useUser();
+  const [usernameAvailable, setUsernameAvailable] = useState<boolean>(true);
+  const [emailAvailable, setEmailAvailable] = useState<boolean>(true);
 
   const initValues = {username: '', password: '', email: ''};
 
@@ -19,7 +22,23 @@ const RegisterForm = () => {
     doRegister,
     initValues,
   );
+  const {getUsernameAvailable, getEmailAvailable} = useUser();
 
+  const handleUsernameBlur = async (
+    event: React.SyntheticEvent<HTMLInputElement>,
+  ) => {
+    const result = await getUsernameAvailable(event.currentTarget.value);
+    setUsernameAvailable(result.available);
+  };
+
+  const handleEmailBlur = async (
+    event: React.SyntheticEvent<HTMLInputElement>,
+  ) => {
+    const result = await getEmailAvailable(event.currentTarget.value);
+    setEmailAvailable(result.available);
+  };
+
+  console.log(usernameAvailable, emailAvailable);
   return (
     <>
       <h3 className="text-3xl">Register</h3>
@@ -34,6 +53,7 @@ const RegisterForm = () => {
             type="text"
             id="username"
             onChange={handleInputChange}
+            onBlur={handleUsernameBlur}
             autoComplete="username"
           />
         </div>
@@ -47,6 +67,7 @@ const RegisterForm = () => {
             type="password"
             id="password"
             onChange={handleInputChange}
+            onBlur={handleEmailBlur}
             autoComplete="current-password"
           />
         </div>
