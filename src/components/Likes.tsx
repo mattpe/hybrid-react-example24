@@ -94,6 +94,8 @@ const Likes = ({item}: {item: MediaItemWithOwner}) => {
     }
   };
 
+  console.log(likeState);
+
   return (
     <>
       Like count: {likeState.count}
