@@ -7,17 +7,25 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {user} = useUserContext();
   console.log('user', user);
   return (
-    <tr className="media-row">
-      <td>
-        <img src={item.thumbnail} alt={item.title} />
+    <tr className="*:p-4">
+      <td className="flex items-center justify-center border border-slate-700">
+        <img
+          className="h-60 w-72 object-cover"
+          src={item.thumbnail}
+          alt={item.title}
+        />
       </td>
-      <td>{item.title}</td>
-      <td>{item.description}</td>
-      <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
-      <td>{item.filesize}</td>
-      <td>{item.media_type}</td>
-      <td>{item.username}</td>
-      <td>
+      <td className="border border-slate-700">{item.title}</td>
+      <td className="text-ellipsis border border-slate-700">
+        {item.description}
+      </td>
+      <td className="border border-slate-700">
+        {new Date(item.created_at).toLocaleString('fi-FI')}
+      </td>
+      <td className="border border-slate-700">{item.filesize}</td>
+      <td className="border border-slate-700">{item.media_type}</td>
+      <td className="border border-slate-700">{item.username}</td>
+      <td className="border border-slate-700">
         <Link
           className="bg-slate-700 p-2 hover:bg-slate-950"
           to="/single"
