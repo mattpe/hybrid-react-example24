@@ -23,7 +23,9 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
         {new Date(item.created_at).toLocaleString('fi-FI')}
       </td>
       <td className="border border-slate-700">{item.filesize}</td>
-      <td className="border border-slate-700">{item.media_type}</td>
+      <td className="border border-slate-700">
+        {item.media_type.replace('&#x2F;', '/')}
+      </td>
       <td className="border border-slate-700">{item.username}</td>
       <td className="border border-slate-700">
         <div className="flex flex-col">
