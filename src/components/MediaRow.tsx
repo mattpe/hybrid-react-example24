@@ -26,30 +26,32 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
       <td className="border border-slate-700">{item.media_type}</td>
       <td className="border border-slate-700">{item.username}</td>
       <td className="border border-slate-700">
-        <Link
-          className="bg-slate-700 p-2 hover:bg-slate-950"
-          to="/single"
-          state={item}
-        >
-          View
-        </Link>
-        {user &&
-          (user.user_id === item.user_id || user.level_name === 'Admin') && (
-            <>
-              <button
-                className="bg-slate-700 p-2 hover:bg-slate-950"
-                onClick={() => console.log('modify', item)}
-              >
-                Modify
-              </button>
-              <button
-                className="bg-slate-700 p-2 hover:bg-slate-950"
-                onClick={() => console.log('delete', item)}
-              >
-                Delete
-              </button>
-            </>
-          )}
+        <div className="flex flex-col">
+          <Link
+            className="bg-slate-600 p-2 text-center hover:bg-slate-950"
+            to="/single"
+            state={item}
+          >
+            View
+          </Link>
+          {user &&
+            (user.user_id === item.user_id || user.level_name === 'Admin') && (
+              <>
+                <button
+                  className="bg-slate-700 p-2 hover:bg-slate-950"
+                  onClick={() => console.log('modify', item)}
+                >
+                  Modify
+                </button>
+                <button
+                  className="bg-slate-800 p-2 hover:bg-slate-950"
+                  onClick={() => console.log('delete', item)}
+                >
+                  Delete
+                </button>
+              </>
+            )}
+        </div>
       </td>
     </tr>
   );

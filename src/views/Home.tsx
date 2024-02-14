@@ -10,7 +10,7 @@ const Home = () => {
       <table>
         <thead>
           <tr>
-            <th className="w-2/12 border border-slate-700">Thumbnail</th>
+            <th className="w-3/12 border border-slate-700">Thumbnail</th>
             <th className="w-1/12 border border-slate-700">Title</th>
             <th className="w-2/12 border border-slate-700">Description</th>
             <th className="w-1/12 border border-slate-700">Created</th>
