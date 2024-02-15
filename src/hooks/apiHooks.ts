@@ -126,7 +126,19 @@ const useUser = () => {
     );
   };
 
-  return {getUserByToken, postUser, getUsernameAvailable, getEmailAvailable};
+  const getUserById = async (user_id: number) => {
+    return await fetchData<User>(
+      import.meta.env.VITE_AUTH_API + '/users/' + user_id,
+    );
+  };
+
+  return {
+    getUserByToken,
+    postUser,
+    getUsernameAvailable,
+    getEmailAvailable,
+    getUserById,
+  };
 };
 
 const useAuthentication = () => {
@@ -244,14 +256,14 @@ const useComment = () => {
     );
   };
 
-  const getComments = async (media_id: number) => {
+  const getCommentsByMediaId = async (media_id: number) => {
     // TODO: Send a GET request to /comments/:media_id to get the comments.
     return await fetchData<Comment[]>(
-      import.meta.env.VITE_MEDIA_API + '/comments/' + media_id,
+      import.meta.env.VITE_MEDIA_API + '/comments/bymedia/' + media_id,
     );
   };
 
-  return {postComment, getComments};
+  return {postComment, getCommentsByMediaId};
 };
 
 export {useMedia, useUser, useAuthentication, useFile, useLike, useComment};

@@ -1,29 +1,32 @@
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {useUserContext} from '../hooks/ContextHooks';
 import {useForm} from '../hooks/formHooks';
 import {useCommentStore} from '../store';
 import {MediaItemWithOwner} from '../types/DBTypes';
+import {useComment} from '../hooks/apiHooks';
 
 const Comments = ({item}: {item: MediaItemWithOwner}) => {
-  const {comments, addComment} = useCommentStore();
+  const {comments, setComments} = useCommentStore();
   const {user} = useUserContext();
   const formRef = useRef<HTMLFormElement>(null);
+  const {getCommentsByMediaId, postComment} = useComment();
 
   const initValues = {comment_text: ''};
 
   const doComment = async () => {
-    if (!user) {
+    const token = localStorage.getItem('token');
+    if (!user || !token) {
       return;
     }
-    addComment({
-      comment_text: inputs.comment_text,
-      media_id: item.media_id,
-      user_id: user.user_id,
-      username: user.username,
-    });
-    // resetoi lomake
-    if (formRef.current) {
-      formRef.current.reset();
+    try {
+      await postComment(inputs.comment_text, item.media_id, token);
+      await getComments();
+      // resetoi lomake
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } catch (error) {
+      console.error('postComment failed', error);
     }
   };
 
@@ -32,7 +35,20 @@ const Comments = ({item}: {item: MediaItemWithOwner}) => {
     initValues,
   );
 
-  console.log(comments);
+  const getComments = async () => {
+    try {
+      const comments = await getCommentsByMediaId(item.media_id);
+      setComments(comments);
+    } catch (error) {
+      console.error('getComments failed', error);
+      setComments([]);
+    }
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   return (
     <>
       {user && (
