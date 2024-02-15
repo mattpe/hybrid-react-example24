@@ -62,6 +62,16 @@ const Comments = ({item}: {item: MediaItemWithOwner}) => {
           </form>
         </>
       )}
+      <h3 className="text-3xl">Comments</h3>
+      <ul>
+        {comments.map((comment) => (
+          <li key={comment.comment_id}>
+            <p>On {new Date(comment.created_at!).toString()}</p>
+            <p>User {comment.username}</p>
+            <p>Commented: {comment.comment_text}</p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
