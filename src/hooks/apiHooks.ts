@@ -256,11 +256,23 @@ const useComment = () => {
     );
   };
 
+  const {getUserById} = useUser();
+
   const getCommentsByMediaId = async (media_id: number) => {
     // TODO: Send a GET request to /comments/:media_id to get the comments.
-    return await fetchData<Comment[]>(
+    const comments = await fetchData<Comment[]>(
       import.meta.env.VITE_MEDIA_API + '/comments/bymedia/' + media_id,
     );
+    // Get usernames for all comments from auth api
+    const commentsWithUsername = await Promise.all<
+      Comment & {username: string}
+    >(
+      comments.map(async (comment) => {
+        const user = await getUserById(comment.user_id);
+        return {...comment, username: user.username};
+      }),
+    );
+    return commentsWithUsername;
   };
 
   return {postComment, getCommentsByMediaId};
