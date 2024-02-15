@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import {useUserContext} from '../hooks/ContextHooks';
 import {useForm} from '../hooks/formHooks';
 import {useCommentStore} from '../store';
@@ -6,6 +7,7 @@ import {MediaItemWithOwner} from '../types/DBTypes';
 const Comments = ({item}: {item: MediaItemWithOwner}) => {
   const {comments, addComment} = useCommentStore();
   const {user} = useUserContext();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const initValues = {comment_text: ''};
 
@@ -19,6 +21,10 @@ const Comments = ({item}: {item: MediaItemWithOwner}) => {
       user_id: user.user_id,
       username: user.username,
     });
+    // resetoi lomake
+    if (formRef.current) {
+      formRef.current.reset();
+    }
   };
 
   const {handleSubmit, handleInputChange, inputs} = useForm(
@@ -30,7 +36,7 @@ const Comments = ({item}: {item: MediaItemWithOwner}) => {
   return (
     <>
       <h3 className="text-3xl">Post Comment</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <div className="flex w-4/5">
           <label className="w-1/3 p-6 text-end" htmlFor="comment">
             Comment
