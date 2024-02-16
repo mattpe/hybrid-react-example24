@@ -1,10 +1,25 @@
 import {Link} from 'react-router-dom';
 import {MediaItemWithOwner} from '../types/DBTypes';
 import {useUserContext} from '../hooks/ContextHooks';
+import {useMedia} from '../hooks/graphQLHooks';
 
 const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {item} = props;
   const {user} = useUserContext();
+  const {deleteMedia} = useMedia();
+
+  const deleteHandler = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
+      const result = await deleteMedia(item.media_id, token);
+      console.log('delete result', result);
+    } catch (e) {
+      console.error('delete failed', (e as Error).message);
+    }
+
   return (
     <tr className="*:p-4">
       <td className="flex items-center justify-center border border-slate-700">
