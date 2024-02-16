@@ -5,7 +5,7 @@ import {useUserContext} from '../hooks/ContextHooks';
 const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {item} = props;
   const {user} = useUserContext();
-  console.log('user', user);
+  console.log('user_id', typeof user.user_id, 'owner_id', typeof item.user_id);
   return (
     <tr className="*:p-4">
       <td className="flex items-center justify-center border border-slate-700">
@@ -26,7 +26,7 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
       <td className="border border-slate-700">
         {item.media_type.replace('&#x2F;', '/')}
       </td>
-      <td className="border border-slate-700">{item.username}</td>
+      <td className="border border-slate-700">{item.owner.username}</td>
       <td className="border border-slate-700">
         <div className="flex flex-col">
           <Link
