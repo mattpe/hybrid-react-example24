@@ -62,7 +62,7 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
                 </button>
                 <button
                   className="bg-slate-800 p-2 hover:bg-slate-950"
-                  onClick={() => console.log('delete', item)}
+                  onClick={deleteHandler}
                 >
                   Delete
                 </button>
