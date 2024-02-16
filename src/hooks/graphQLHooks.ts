@@ -91,7 +91,24 @@ const useMedia = () => {
     );
   };
 
-  return {mediaArray, postMedia};
+  const deleteMedia = async (media_id: string, token: string) => {
+    const query = `mutation DeleteMediaItem($mediaId: ID!) {
+      deleteMediaItem(media_id: $mediaId) {
+        message
+      }
+    }`;
+
+    const variables = {mediaId: media_id};
+
+    const deleteResult = await makeQuery<
+      GraphQLResponse<{deleteMediaItem: MessageResponse}>,
+      {mediaId: string}
+    >(query, variables, token);
+
+    return deleteResult.data.deleteMediaItem;
+  };
+
+  return {mediaArray, postMedia, deleteMedia};
 };
 
 const useUser = () => {
