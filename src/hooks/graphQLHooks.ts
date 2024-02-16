@@ -152,16 +152,26 @@ const useUser = () => {
 
 const useAuthentication = () => {
   const postLogin = async (creds: Credentials) => {
-    return await fetchData<LoginResponse>(
-      import.meta.env.VITE_AUTH_API + '/auth/login',
-      {
-        method: 'POST',
-        body: JSON.stringify(creds),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    const query = `
+    mutation Login($username: String!, $password: String!) {
+      login(username: $username, password: $password) {
+        token
+        message
+        user {
+          user_id
+          username
+          email
+          level_name
+          created_at
+        }
+      }
+    }
+  `;
+    const loginResult = await makeQuery<
+      GraphQLResponse<{login: LoginResponse}>,
+      Credentials
+    >(query, creds);
+    return loginResult.data.login;
   };
 
   return {postLogin};

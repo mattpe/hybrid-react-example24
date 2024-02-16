@@ -5,7 +5,6 @@ import {useUserContext} from '../hooks/ContextHooks';
 const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {item} = props;
   const {user} = useUserContext();
-  console.log('user_id', typeof user.user_id, 'owner_id', typeof item.user_id);
   return (
     <tr className="*:p-4">
       <td className="flex items-center justify-center border border-slate-700">
@@ -54,6 +53,7 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
               </>
             )}
         </div>
+        <p>Comments: {item.comments_count}</p>
       </td>
     </tr>
   );
