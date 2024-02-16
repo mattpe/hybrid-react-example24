@@ -171,6 +171,7 @@ const useAuthentication = () => {
       GraphQLResponse<{login: LoginResponse}>,
       Credentials
     >(query, creds);
+    console.log(loginResult);
     return loginResult.data.login;
   };
 
