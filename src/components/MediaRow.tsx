@@ -19,6 +19,7 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
     } catch (e) {
       console.error('delete failed', (e as Error).message);
     }
+  };
 
   return (
     <tr className="*:p-4">
