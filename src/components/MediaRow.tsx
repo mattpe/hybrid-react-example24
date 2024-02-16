@@ -1,12 +1,13 @@
 import {Link} from 'react-router-dom';
 import {MediaItemWithOwner} from '../types/DBTypes';
-import {useUserContext} from '../hooks/ContextHooks';
+import {useUpdateContext, useUserContext} from '../hooks/ContextHooks';
 import {useMedia} from '../hooks/graphQLHooks';
 
 const MediaRow = (props: {item: MediaItemWithOwner}) => {
   const {item} = props;
   const {user} = useUserContext();
   const {deleteMedia} = useMedia();
+  const {update, setUpdate} = useUpdateContext();
 
   const deleteHandler = async () => {
     try {
@@ -16,6 +17,7 @@ const MediaRow = (props: {item: MediaItemWithOwner}) => {
       }
       const result = await deleteMedia(item.media_id, token);
       console.log('delete result', result);
+      setUpdate(!update);
     } catch (e) {
       console.error('delete failed', (e as Error).message);
     }
