@@ -1,5 +1,6 @@
 type UserLevel = {
-  level_id: number;
+  // level_id: number; // REST API
+  level_id: string; // GraphQL
   level_name: 'Admin' | 'User' | 'Guest';
 };
 
