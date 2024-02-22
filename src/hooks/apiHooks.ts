@@ -41,7 +41,7 @@ const useMedia = () => {
     getMedia();
   }, []);
 
-  const postMedia = (
+  const postMedia = async (
     file: UploadResponse,
     inputs: Record<string, string>,
     token: string,
@@ -69,7 +69,7 @@ const useMedia = () => {
       },
       body: JSON.stringify(media),
     };
-    return fetchData<MediaResponse>(
+    return await fetchData<MediaResponse>(
       import.meta.env.VITE_MEDIA_API + '/media',
       options,
     );
